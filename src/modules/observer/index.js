@@ -74,7 +74,7 @@ class Observer {
 
   walk(obj) {
     Object.keys(obj).forEach(key => {
-      defineReactive$$1(obj, key, obj[key]);
+      defineReactive(obj, key, obj[key]);
     });
   }
 
@@ -85,7 +85,7 @@ class Observer {
   }
 }
 
-function defineReactive$$1 (obj, key, val) {
+function defineReactive (obj, key, val) {
   let dep = new Dep();
   let childOb = observe(val);
   Object.defineProperty(obj, key, {
@@ -129,6 +129,6 @@ function observe(value, asRootData) {
 
 export {
   Observer,
-  defineReactive$$1,
+  defineReactive,
   observe
 };

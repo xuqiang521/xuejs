@@ -1,19 +1,33 @@
-import _ from 'utils'
-import {Observer, observe, defineReactive$$1} from 'observer'
+import { observe } from 'observer'
+import {
+  set,
+  del,
+  initComputed
+} from 'instance'
 import Compiler from 'compiler'
+import '../pages/index.html'
 import 'styles'
 
 class Xue {
   constructor (options) {
     this.$options = options || {};
+
+    this.init(options);
+  }
+
+  init (vm) {
     let data = this._data = this.$options.data;
     let self = this;
+
+    initComputed(self);
 
     Object.keys(data).forEach(key => {
       self.proxy(key);
     });
-    observe(data, this);
-    new Compiler(options.el || document.body, this);
+
+    observe(data, self);
+    new Compiler(vm.el || document.body, self);
+
   }
 
   proxy (key, setter, getter) {
@@ -40,39 +54,6 @@ class Xue {
   }
 }
 
-function set (target, key, val) {
-  if (Array.isArray(target) && typeof key === 'number') {
-    target.length = Math.max(target.length, key);
-    target.splice(key, 1, val);
-    return val;
-  }
-  if (_.hasOwn(target, key)) {
-    target[key] = val;
-    return val;
-  }
-  let ob = (target).__ob__;
-  if (!ob) {
-    target[key] = val;
-    return val;
-  }
-  defineReactive$$1(ob.value, key, val);
-  ob.dep.notify();
-  return val;
-}
-function del (target, key) {
-  if (Array.isArray(target) && typeof key === 'number') {
-    target.splice(key, 1);
-    return;
-  }
-  let ob = (target).__ob__;
-  if (!_.hasOwn(target, key)) {
-    return;
-  }
-  delete target[key];
-  if (!ob) {
-    return;
-  }
-  ob.dep.notify();
-}
+
 
 module.exports = window.Xue = Xue;
