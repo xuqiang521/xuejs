@@ -81,6 +81,7 @@ module.exports = {
       'compiler': path.resolve(__dirname, 'src/modules/compiler'),
       'watcher': path.resolve(__dirname, 'src/modules/watcher'),
       'observer': path.resolve(__dirname, 'src/modules/observer'),
+      'instance': path.resolve(__dirname, 'src/modules/instance'),
       'styles': path.resolve(__dirname, 'src/views')
     }
   },

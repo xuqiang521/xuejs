@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "dev": "webpack-dev-server --hot -d",
+    "dev": "webpack-dev-server --hot -d --inline",
     "http": "cd src/pages && http-server -p 9000",
     "build": "webpack -p",
     "build:local": "webpack"
