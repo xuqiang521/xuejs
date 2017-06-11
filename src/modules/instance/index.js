@@ -4,34 +4,28 @@ import Watcher from 'watcher'
 import Dep from 'observer/dep'
 
 exports.initComputed = function (vm) {
-  let watchers = vm._computedWatchers = Object.create(null);
   let computed = vm.$options.computed;
 
-  if (!computed) return;
-  if (typeof computed === 'object') {
-    Object.keys(computed).forEach(key => {
-      let userDef = computed[key];
-      let getter = typeof userDef === 'function' ? userDef : userDef.get;
+  if (!computed || typeof computed !== 'object') return;
+  Object.keys(computed).forEach(key => {
+    let userDef = computed[key];
+    let getter = typeof userDef === 'function' ? userDef : userDef.get;
 
-      if (getter === undefined) {
-        warn(
-          ("No getter function has been defined for computed property \"" + key + "\"."),
-          vm
-        );
-        getter = _.noop;
-      }
-      watchers[key] = new Watcher(vm, getter, _.noop);
+    if (getter === undefined) {
+      warn(
+        ("No getter function has been defined for computed property \"" + key + "\"."),
+        vm
+      );
+      getter = _.noop;
+    }
 
-      Object.defineProperty(vm._data, key, {
-        enumerable: true,
-        configurable: true,
-        get:  typeof computed[key] === 'function'
-          ? computed[key]
-          : computed[key].get,
-        set: _.noop
-      })
-    });
-  }
+    Object.defineProperty(vm._data, key, {
+      enumerable: true,
+      configurable: true,
+      get:  getter,
+      set: _.noop
+    })
+  });
 }
 
 exports.set = function (target, key, val) {

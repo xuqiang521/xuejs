@@ -1,4 +1,7 @@
 import Dep from 'observer/dep';
+import {
+  initComputed
+} from 'instance'
 
 class Watcher {
   constructor(vm, expOrFn, cb) {
@@ -15,6 +18,7 @@ class Watcher {
       this.getter = this.parseGetter(expOrFn);
     }
     this.value = this.get();
+    initComputed(vm);
   }
 
   update () {
