@@ -41,9 +41,12 @@ function hasOwn(obj, key) {
   return hasOwnProperty.call(obj, key);
 }
 
+function noop () {}
+
 module.exports = {
   def: def,
   protoAugment: protoAugment,
   copyAugment: copyAugment,
-  hasOwn: hasOwn
+  hasOwn: hasOwn,
+  noop: noop
 }
