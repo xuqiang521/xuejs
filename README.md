@@ -31,7 +31,7 @@ npm run build:local
 
 - [x] 对象监听
 - [x] 数组监听
-- [ ] computed
+- [x] computed
 - [x] watch deep
 - [x] x-html
 - [x] x-text

@@ -11,9 +11,10 @@
   <div id="xue">
     <h2>{{b}}</h2>
     <input type="text" x-model="a">
-    <input type="text" name="" value="" x-model="a">
+    <input type="text" name="" value="" x-model="b">
     <p>{{ a }}</p>
     <p>{{ msg }}</p>
+    <p>{{ msg1 }}</p>
     <button type="button" name="button" x-on:click="testToggle">change b</button>
   </div>
 </body>
@@ -36,6 +37,9 @@ var vm = new Xue({
   computed: {
     msg: function () {
       return `计算出来的属性为：${this.a}, ${this.b}。`;
+    },
+    msg1: function () {
+      return `计算出来的属性为：${this.b}, ${this.a}。`;
     }
   }
 });
