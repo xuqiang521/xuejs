@@ -32,7 +32,7 @@ npm run build:local
 - [x] 对象监听
 - [x] 数组监听
 - [x] computed
-- [x] watch deep
+- [x] watch
 - [x] x-html
 - [x] x-text
 - [x] x-model

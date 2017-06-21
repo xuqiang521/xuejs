@@ -4,10 +4,11 @@ import {
 } from 'instance'
 
 class Watcher {
-  constructor(vm, expOrFn, cb) {
+  constructor(vm, expOrFn, cb, options) {
     this.vm      = vm;
     this.expOrFn = expOrFn;
     this.cb      = cb;
+    this.options = options || {};
     this.depIds  = {};
 
     if (typeof expOrFn === 'function') {
@@ -57,13 +58,14 @@ class Watcher {
 
     // 简易的循环依赖处理
     return function(obj) {
-        for (let i = 0, len = exps.length; i < len; i++) {
-            if (!obj) return;
-            obj = obj[exps[i]];
-        }
-        return obj;
+      for (let i = 0, len = exps.length; i < len; i++) {
+        if (!obj) return;
+        obj = obj[exps[i]];
+      }
+      return obj;
     }
   }
+
 }
 
 export default Watcher;

@@ -34,13 +34,16 @@ const CompilerUtils = {
   },
 
   bind: function (node, vm, exp, dir) {
+    let self = this;
     let updaterFn = updater[dir + 'Updater'];
     let val = this._getVmVal(vm, exp);
 
     updaterFn && updaterFn(node, val);
 
     new Watcher(vm, exp, function(value, oldValue) {
-      updaterFn && updaterFn(node, value, oldValue);
+      dir === 'model'
+        ? updaterFn && updaterFn(node, value, oldValue, vm)
+        : updaterFn && updaterFn(node, value, oldValue)   
     });
   },
 
@@ -83,13 +86,16 @@ const CompilerUtils = {
 
 // 指令渲染集合
 const updater = {
-  htmlUpdater: function (node, value) {
+  htmlUpdater: function (node, value, oldValue) {
     node.innerHTML = typeof value === 'undefined' ? '' : value;
   },
-  textUpdater: function (node, value) {
+  textUpdater: function (node, value, oldValue) {
     node.textContent = typeof value === 'undefined' ? '' : value;
   },
-  modelUpdater: function (node, value, oldValue) {
+  modelUpdater: function (node, value, oldValue, vm) {
+    if (vm) {
+      initWatch (vm, value, oldValue)
+    }
     if ($elm === node) {
       return false;
     }
@@ -98,4 +104,11 @@ const updater = {
   }
 }
 
+function initWatch (vm, value, oldValue) {
+  let watch = vm.$options.watch;
+  for (let key in watch) {
+    let handler = watch[key];
+    handler(value, oldValue)
+  }
+}
 export { CompilerUtils, updater };

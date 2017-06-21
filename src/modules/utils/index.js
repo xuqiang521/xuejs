@@ -1,3 +1,4 @@
+const _ = exports;
 /**
  * [def 定义对象属性]
  * @param  {Object}  obj        对象
@@ -5,7 +6,7 @@
  * @param  {*}       val        属性值
  * @param  {Boolean} enumerable 是否可被枚举
  */
-function def (obj, key, val, enumerable) {
+_.def = function def (obj, key, val, enumerable) {
   Object.defineProperty(obj, key, {
     value: val,
     enumerable: !!enumerable,
@@ -19,7 +20,7 @@ function def (obj, key, val, enumerable) {
  * @param  {Object} target [目标对象]
  * @param  {Object} src    [Array方法]
  */
-function protoAugment(target, src) {
+_.protoAugment = function protoAugment(target, src) {
   target.__proto__ = src;
 }
 
@@ -29,7 +30,7 @@ function protoAugment(target, src) {
  * @param  {Object} src    [Array方法]
  * @param  {Array}  keys   [Array方法键值集合]
  */
-function copyAugment(target, src, keys) {
+_.copyAugment = function copyAugment(target, src, keys) {
   for (let i = 0, l = keys.length; i < l; i++) {
     let key = keys[i];
     def(target, key, src[key]);
@@ -37,16 +38,37 @@ function copyAugment(target, src, keys) {
 }
 
 // 返回一个布尔值，指示对象是否具有指定的属性作为自身（不继承）属性
-function hasOwn(obj, key) {
+_.hasOwn = function hasOwn(obj, key) {
   return hasOwnProperty.call(obj, key);
 }
 
-function noop () {}
+// 空操作
+_.noop = function noop () {}
 
-module.exports = {
-  def: def,
-  protoAugment: protoAugment,
-  copyAugment: copyAugment,
-  hasOwn: hasOwn,
-  noop: noop
+// 是否是原生代码
+_.isNative = function isNative (methodName) {
+  return typeof methodName === 'function' && /native code/.test(methodName);
+}
+
+// 处理Set兼容
+if (typeof Set !== 'undefined' && _.isNative(Set)) {
+  _.Set = Set
+}
+else {
+  _.Set = (function () {
+    function Set () {
+      this.set = Object.create(null);
+    }
+    Set.prototype.has = function has (key) {
+      return this.set[key] === true
+    };
+    Set.prototype.add = function add (key) {
+      this.set[key] = true;
+    };
+    Set.prototype.clear = function clear () {
+      this.set = Object.create(null);
+    };
+
+    return Set;
+  }());
 }

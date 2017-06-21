@@ -63,3 +63,4 @@ exports.del = function (target, key) {
   }
   ob.dep.notify();
 }
+

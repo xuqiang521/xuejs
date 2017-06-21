@@ -2,7 +2,8 @@ import { observe } from 'observer'
 import {
   set,
   del,
-  initComputed
+  initComputed,
+  initWatch
 } from 'instance'
 import Compiler from 'compiler'
 import '../pages/index.html'
@@ -52,6 +53,7 @@ class Xue {
   $delete (target, key) {
     del (target, key)
   }
+
 }
 
 

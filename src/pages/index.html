@@ -41,6 +41,11 @@ var vm = new Xue({
     msg1: function () {
       return `计算出来的属性为：${this.b}, ${this.a}。`;
     }
+  },
+  watch: {
+    a: function (newVal, oldVal) {
+      console.log(newVal, oldVal);
+    }
   }
 });
 vm.c.push(4);
