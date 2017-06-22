@@ -42,12 +42,20 @@ var vm = new Xue({
       return `计算出来的属性为：${this.b}, ${this.a}。`;
     }
   },
-  watch: {
-    a: function (newVal, oldVal) {
-      console.log(newVal, oldVal);
-    }
-  }
+  // watch: {
+  //   a: function (newVal, oldVal) {
+  //     console.log(newVal, oldVal);
+  //   }
+  // }
 });
+vm.$watch('a', function (newVal, oldVal) {
+  console.log(newVal, oldVal);
+}, {
+  immediate: true
+})
+vm.$watch('b', function (newVal, oldVal) {
+  console.log(newVal, oldVal);
+})
 vm.c.push(4);
 // notify
 // vm.c => (3)[1, 2, 4, __ob__: Observer]

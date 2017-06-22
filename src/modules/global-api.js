@@ -5,6 +5,7 @@ import {
   initComputed,
   initWatch
 } from 'instance'
+import Watcher from 'watcher'
 import Compiler from 'compiler'
 import '../pages/index.html'
 import 'styles'
@@ -14,6 +15,7 @@ class Xue {
     this.$options = options || {};
 
     this.init(options);
+    initWatch(this);
   }
 
   init (vm) {
@@ -54,8 +56,14 @@ class Xue {
     del (target, key)
   }
 
+  $watch (expOrFn, cb, options) {
+    let vm = this;
+    options = options || {};
+    let watcher = new Watcher(vm, expOrFn, cb, options);
+    if (options.immediate) {
+      cb.call(vm, watcher.value)
+    }
+  }
 }
-
-
 
 module.exports = window.Xue = Xue;

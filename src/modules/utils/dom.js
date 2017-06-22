@@ -1,7 +1,7 @@
 import Watcher from 'watcher'
 
 // 缓存当前执行input事件的input dom对象
-let $elm;
+// let $elm;
 let timer = null;
 // 指令处理集合
 const CompilerUtils = {
@@ -21,7 +21,7 @@ const CompilerUtils = {
     // 监听input事件
     node.addEventListener('input', function (e) {
       let newVal = e.target.value;
-      $elm = e.target
+      // $elm = e.target
 
       if (val === newVal) return;
 
@@ -93,22 +93,12 @@ const updater = {
     node.textContent = typeof value === 'undefined' ? '' : value;
   },
   modelUpdater: function (node, value, oldValue, vm) {
-    if (vm) {
-      initWatch (vm, value, oldValue)
-    }
-    if ($elm === node) {
-      return false;
-    }
-    $elm = undefined;
+    // if ($elm === node) {
+    //   return false;
+    // }
+    // $elm = undefined;
     node.value = typeof value === 'undefined' ? '' : value;
   }
 }
 
-function initWatch (vm, value, oldValue) {
-  let watch = vm.$options.watch;
-  for (let key in watch) {
-    let handler = watch[key];
-    handler(value, oldValue)
-  }
-}
 export { CompilerUtils, updater };

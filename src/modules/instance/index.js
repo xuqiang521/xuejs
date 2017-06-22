@@ -28,6 +28,14 @@ exports.initComputed = function (vm) {
   });
 }
 
+exports.initWatch = function (vm, options) {
+  let watch = vm.$options.watch;
+  for (let key in watch) {
+    let handler = watch[key];
+    new Watcher(vm, key, handler);
+  }
+}
+
 exports.set = function (target, key, val) {
   if (Array.isArray(target) && typeof key === 'number') {
     target.length = Math.max(target.length, key);

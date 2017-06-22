@@ -5,11 +5,20 @@ import {
 
 class Watcher {
   constructor(vm, expOrFn, cb, options) {
+    if (options) {
+      this.deep = !!options.deep;
+      this.user = !!options.user;
+      this.lazy = !!options.lazy;
+      this.sync = !!options.sync;
+    } else {
+      this.deep = this.user = this.lazy = this.sync = false;
+    }
+
     this.vm      = vm;
     this.expOrFn = expOrFn;
     this.cb      = cb;
-    this.options = options || {};
     this.depIds  = {};
+    this.cbs     = [];
 
     if (typeof expOrFn === 'function') {
       this.getter = expOrFn
@@ -18,7 +27,11 @@ class Watcher {
       expOrFn = expOrFn.trim();
       this.getter = this.parseGetter(expOrFn);
     }
-    this.value = this.get();
+    
+    this.value = this.lazy
+      ? undefined
+      : this.get();
+
     initComputed(vm);
   }
 
@@ -41,6 +54,7 @@ class Watcher {
     if (!this.depIds.hasOwnProperty(dep.id)) {
       dep.addSub(this);
       this.depIds[dep.id] = dep;
+      this.cbs.push(this.cb);
     }
   }
 
