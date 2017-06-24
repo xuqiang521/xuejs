@@ -63,7 +63,11 @@ class Xue {
     if (options.immediate) {
       cb.call(vm, watcher.value)
     }
+    // return function unwatchFn () {
+    //   watcher.teardown()
+    // }
   }
+
 }
 
 module.exports = window.Xue = Xue;

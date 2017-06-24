@@ -19,6 +19,9 @@ class Watcher {
     this.cb      = cb;
     this.depIds  = {};
     this.cbs     = [];
+    this.deps    = [];
+    this.dirty   = this.lazy;
+    this.active  = this.active; 
 
     if (typeof expOrFn === 'function') {
       this.getter = expOrFn
@@ -55,6 +58,14 @@ class Watcher {
       dep.addSub(this);
       this.depIds[dep.id] = dep;
       this.cbs.push(this.cb);
+    }
+  }
+
+  teardown () {
+    let self = this;
+
+    if (this.active) {
+      let i = this.deps.length;
     }
   }
 
