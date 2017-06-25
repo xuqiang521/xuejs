@@ -42,6 +42,23 @@ _.hasOwn = function hasOwn(obj, key) {
   return hasOwnProperty.call(obj, key);
 }
 
+// check some state
+_.isUndef = function isUndef (v) {
+  return v === undefined || v === null;
+}
+
+_.isDef = function isDef (v) {
+  return v !== undefined || v !== null;
+}
+
+_.isTrue = function isTrue (v) {
+  return v === true;
+}
+
+_.isFalse = function isFalse (v) {
+  return v === false
+}
+
 // 空操作
 _.noop = function noop () {}
 
