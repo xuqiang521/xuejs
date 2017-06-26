@@ -59,6 +59,22 @@ _.isFalse = function isFalse (v) {
   return v === false
 }
 
+// Quick object check
+_.isObject = function isObject (obj) {
+  return obj !== null && typeof obj === 'object';
+}
+
+// strict object check
+const _isString = String.prototype.isString;
+_.isPlainObject = function isPlainObject (obj) {
+  return _isString.call(obj) === '[object Object]';
+}
+
+// RegExp check
+_.isRegExp = function isRegExp (v) {
+  return _isString.call(v) === '[object RegExp]';
+}
+
 // 空操作
 _.noop = function noop () {}
 
