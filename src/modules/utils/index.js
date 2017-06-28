@@ -83,6 +83,26 @@ _.isNative = function isNative (methodName) {
   return typeof methodName === 'function' && /native code/.test(methodName);
 }
 
+/**
+ * Convert a value to a string that is actually rendered.
+ */
+_.toString = function toString (val) {
+  return val == null
+    ? ''
+    : typeof val === 'object'
+      ? JSON.stringify(val, null, 2)
+      : String(val)
+}
+
+/**
+ * Convert a input value to a number for persistence.
+ * If the conversion fails, return original string.
+ */
+_.toNumber = function toNumber (val) {
+  var n = parseFloat(val);
+  return isNaN(n) ? val : n
+}
+
 // 处理Set兼容
 if (typeof Set !== 'undefined' && _.isNative(Set)) {
   _.Set = Set
