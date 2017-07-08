@@ -18,7 +18,7 @@ exports.initComputed = function (vm) {
       );
       getter = _.noop;
     }
-
+    
     Object.defineProperty(vm._data, key, {
       enumerable: true,
       configurable: true,
@@ -71,4 +71,3 @@ exports.del = function (target, key) {
   }
   ob.dep.notify();
 }
-

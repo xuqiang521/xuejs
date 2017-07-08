@@ -83,6 +83,17 @@ _.isNative = function isNative (methodName) {
   return typeof methodName === 'function' && /native code/.test(methodName);
 }
 
+_.toArray = function toArray (list, start) {
+  start = start || 0;
+
+  let i   = list.length - start;
+  let ret = new Array(i);
+  while (i--) {
+    ret[i] = list[i + start];
+  }
+  return ret;
+}
+
 /**
  * Convert a value to a string that is actually rendered.
  */
