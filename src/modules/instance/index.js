@@ -18,7 +18,7 @@ exports.initComputed = function (vm) {
       );
       getter = _.noop;
     }
-    
+
     Object.defineProperty(vm._data, key, {
       enumerable: true,
       configurable: true,
@@ -36,6 +36,11 @@ exports.initWatch = function (vm, options) {
   }
 }
 
+/**
+ * {Object | Array} target
+ * {string | number} key
+ * {any} value
+ */
 exports.set = function (target, key, val) {
   if (Array.isArray(target) && typeof key === 'number') {
     target.length = Math.max(target.length, key);
@@ -56,6 +61,10 @@ exports.set = function (target, key, val) {
   return val;
 }
 
+/**
+ * {Object | Array} target
+ * {string | number} key
+ */
 exports.del = function (target, key) {
   if (Array.isArray(target) && typeof key === 'number') {
     target.splice(key, 1);
@@ -70,4 +79,10 @@ exports.del = function (target, key) {
     return;
   }
   ob.dep.notify();
+}
+
+// lifeCycle
+exports.mounted = function (vm) {
+  let handler = vm.$options.mounted;
+  handler && handler();
 }

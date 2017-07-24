@@ -3,6 +3,7 @@ import { observe } from 'observer'
 import {
   set,
   del,
+  mounted,
   initComputed,
   initWatch
 } from 'instance'
@@ -18,6 +19,7 @@ class Xue {
 
     this.init(options);
     initWatch(this);
+    mounted(this);
   }
 
   init(vm) {
@@ -164,7 +166,6 @@ class Xue {
     }
     return self;
   }
-
 }
 
 module.exports = window.Xue = Xue;
