@@ -33,6 +33,13 @@ npm run build:local
 - [x] 数组监听
 - [x] computed
 - [x] watch
+- [x] $watch
+- [x] $set
+- [x] $delete
+- [x] $on
+- [x] $once
+- [x] $off
+- [x] $emit
 - [x] x-html
 - [x] x-text
 - [x] x-model
