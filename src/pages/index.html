@@ -51,27 +51,27 @@ var vm = new Xue({
   //   }
   // }
 });
-// vm.$watch('a', function (newVal, oldVal) {
-//   console.log(newVal, oldVal);
-// }, {
-//   immediate: true
-// })
-// vm.$watch('b', function (newVal, oldVal) {
-//   console.log(newVal, oldVal);
-// })
-// vm.$on('test', function test () {
-//   console.log('测试发布订阅实例方法$on')
-// })
-// vm.$on('test', function test1 () {
-//   console.log('测试发布订阅实例方法$on 1')
-// })
-// vm.$once('test', function test2 () {
-//   console.log('测试发布订阅实例方法$once')
-// })
-// vm.$emit('test')
-// console.log(vm._events)
-// vm.$off('test')
-// console.log(vm._events)
+vm.$watch('a', function (newVal, oldVal) {
+  console.log(newVal, oldVal);
+}, {
+  immediate: true
+})
+vm.$watch('b', function (newVal, oldVal) {
+  console.log(newVal, oldVal);
+})
+vm.$on('test', function test () {
+  console.log('测试发布订阅实例方法$on')
+})
+vm.$on('test', function test1 () {
+  console.log('测试发布订阅实例方法$on 1')
+})
+vm.$once('test', function test2 () {
+  console.log('测试发布订阅实例方法$once')
+})
+vm.$emit('test')
+console.log(vm._events)
+vm.$off('test')
+console.log(vm._events)
 vm.c.push(4);
 // notify
 // vm.c => (3)[1, 2, 4, __ob__: Observer]
