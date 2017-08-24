@@ -38,6 +38,7 @@ _.copyAugment = function copyAugment(target, src, keys) {
 }
 
 // 返回一个布尔值，指示对象是否具有指定的属性作为自身（不继承）属性
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 _.hasOwn = function hasOwn(obj, key) {
   return hasOwnProperty.call(obj, key);
 }
