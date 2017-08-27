@@ -1,4 +1,5 @@
 import _ from 'utils'
+// import config from 'utils/config'
 import { defineReactive} from 'observer'
 import Watcher from 'watcher'
 import Dep from 'observer/dep'
@@ -86,3 +87,57 @@ exports.mounted = function (vm) {
   let handler = vm.$options.mounted;
   handler && handler();
 }
+
+// nextTick
+exports.nextTick = (function () {
+  let callbacks = [];
+  let pending = false;
+  let timeFunc;
+
+  // 下一进程处理
+  function nextTickHandler () {
+    pending = false;
+    let copies = callbacks.slice(0);
+    callbacks.length = 0;
+    for (let i = 0; i < copies.length; i++) {
+      copies[i]();
+    }
+  }
+
+  if (typeof Promise !== 'undefined' && _.isNative(Promise)) {
+    let p = Promise.resolve();
+    let logError = function (err) { console.error(err); };
+    timeFunc = function () {
+      p.then(nextTickHandler).catch(logError);
+    }
+  }
+  else {
+    timeFunc = function () {
+      setTimeout(nextTickHandler, 0);
+    }
+  }
+
+  return function queueNextTick (cb, ctx) {
+    let _resolve;
+    callbacks.push(function () {
+      if (cb) {
+        try {
+          cb.call(ctx);
+        } catch (e) {
+          logError(e);
+        }
+      } else if (_resolve) {
+        _resolve(ctx);
+      }
+    });
+    if (!pending) {
+      pending = true;
+      timerFunc();
+    }
+    if (!cb && typeof Promise !== 'undefined') {
+      return new Promise(function (resolve, reject) {
+        _resolve = resolve;
+      })
+    }
+  }
+})()
