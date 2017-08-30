@@ -49,6 +49,7 @@ npm run build:local
 - [x] x-on
 - [ ] Virtual Dom && diff
 - [ ] components
+- [x] nextTick && $nextTick
 
 ## 总结
 
