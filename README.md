@@ -4,7 +4,7 @@
 
 一个属于自己的简易版本的mvvm框架，正在不断的完善中。
 
-跟进前，请阅读两篇引导篇
+跟进前，请阅读几篇引导篇
 
 1. [合格前端系列第三弹](https://zhuanlan.zhihu.com/p/27028242)
 
@@ -51,7 +51,7 @@ npm run build:local
 - [x] x-on
 - [ ] Virtual Dom && diff
 - [ ] components
-- [x] nextTick && $nextTick
+- [ ] nextTick && $nextTick
 
 ## 总结
 
