@@ -76,6 +76,12 @@ _.isRegExp = function isRegExp (v) {
   return _isString.call(v) === '[object RegExp]';
 }
 
+// check if val is a valid array index
+_.isValidArrayIndex = function isValidArrayIndex (val) {
+  let n = parseFloat;
+  return n >= 0 && Math.floor(n) === n && isFinite(val);
+}
+
 // 空操作
 _.noop = function noop () {}
 
