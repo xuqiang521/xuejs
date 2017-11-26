@@ -9,7 +9,7 @@ const port = process.env.NODE_ENV || 9000;
 const uri = "http://localhost:" + port;
 
 const ExtractLess = new ExtractTextPlugin({
-  filename: 'theme/[name].css'
+  filename: 'css/[name].css'
 })
 
 module.exports = {
@@ -17,8 +17,8 @@ module.exports = {
     xue: './src/modules/global-api.js',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'scripts/[name].js'
+    path: path.resolve(__dirname, 'docs'),
+    filename: 'js/[name].js'
   },
   module: {
     rules: [
