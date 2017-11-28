@@ -21,7 +21,7 @@ npm install
 # 本地服务
 npm run dev
 
-# 文件打包 (生成环境)
+# 文件打包 (生产环境)
 npm run build
 
 # 文件打包 (本地打包)
