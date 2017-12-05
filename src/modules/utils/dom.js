@@ -36,8 +36,14 @@ const CompilerUtils = {
   bind: function (node, vm, exp, dir) {
     let self = this;
     let updaterFn = updater[dir + 'Updater'];
-    let val = this._getVmVal(vm, exp);
-
+    // normal
+    // let val = this._getVmVal(vm, exp);
+    // {{"hello " + exp + ' good'}}
+    let reg = /\'|\"/g, val, arr = [];
+    exp.split('+').forEach((tag, index) => {
+      arr[index] = reg.test(tag) ? tag.replace(reg, '') : (exp = tag, this._getVmVal(vm, tag));
+    })
+    val = arr.join('')
     updaterFn && updaterFn(node, val);
 
     new Watcher(vm, exp, function(value, oldValue) {
@@ -90,7 +96,20 @@ const updater = {
     node.innerHTML = typeof value === 'undefined' ? '' : value;
   },
   textUpdater: function (node, value, oldValue) {
-    node.textContent = typeof value === 'undefined' ? '' : value;
+    let reg = /\{\{((?:.|\n)+?)\}\}/g;
+
+    // 暂时不支持特殊字符的输入
+    // console.log('node.textContent:'+node.textContent, 'value:'+value, 'oldValue:'+oldValue);
+    if (reg.test(node.textContent)) {
+      node.textContent = value === undefined ? '' : value;
+    } else {
+      if (oldValue === undefined) {
+        node.textContent = node.textContent + value;
+      } else {
+        let reg1 = new RegExp(oldValue)
+        node.textContent = node.textContent.replace(reg1, value);
+      }
+    }
   },
   modelUpdater: function (node, value, oldValue, vm) {
     // if ($elm === node) {

@@ -29,15 +29,23 @@ class Compiler {
 
     [].slice.call(childNodes).forEach(node => {
       let text = node.textContent;
-      let reg = /\{\{((?:.|\n)+?)\}\}/;
+      let reg = /\{\{((?:.|\n)+?)\}\}/g;
+      let match;
 
       // 如果是element节点
       if (self.isElementNode(node)) {
         self.compile(node);
       }
       // 如果是text节点
-      else if (self.isTextNode(node) && reg.test(text)) {
-        self.compileText(node, RegExp.$1)
+      else if (self.isTextNode(node)) {
+        while ((match = reg.exec(text)) !== null) {
+          // console.log(match[1]);
+          
+          self.compileText(node, match[1])
+        }
+        // console.log(text.match(reg));
+        // console.log(RegExp.$1);
+        // self.compileText(node, RegExp.$1)
       }
       // 解析子节点包含的指令
       if (node.childNodes && node.childNodes.length) {
@@ -70,6 +78,7 @@ class Compiler {
   }
 
   compileText (node, exp) {
+    console.log(exp);
     CompilerUtils.text(node, this.$vm, exp);
   }
 

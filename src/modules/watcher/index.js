@@ -71,7 +71,7 @@ class Watcher {
 
   get () {
     Dep.target = this;  // 将当前订阅者指向自己
-    let value = this.getter.call(this.vm, this.vm._data); // 触发getter，将自身添加到dep中
+    let value = this.getter && this.getter.call(this.vm, this.vm._data); // 触发getter，将自身添加到dep中
     Dep.target = null;  // 添加完成 重置
     return value;
   }
