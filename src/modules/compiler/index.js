@@ -30,7 +30,7 @@ class Compiler {
     [].slice.call(childNodes).forEach(node => {
       let text = node.textContent;
       let reg = /\{\{((?:.|\n)+?)\}\}/g;
-      let match;
+      // let match;
 
       // 如果是element节点
       if (self.isElementNode(node)) {
@@ -38,11 +38,13 @@ class Compiler {
       }
       // 如果是text节点
       else if (self.isTextNode(node)) {
-        while ((match = reg.exec(text)) !== null) {
-          // console.log(match[1]);
-          
-          self.compileText(node, match[1])
-        }
+        // while ((match = reg.exec(text)) !== null) {
+        //   // console.log(match[1]);
+        //   self.compileText(node, match[1])
+        // }
+        text.replace(reg, (all, item) => {
+          self.compileText(node, item)
+        })
         // console.log(text.match(reg));
         // console.log(RegExp.$1);
         // self.compileText(node, RegExp.$1)
