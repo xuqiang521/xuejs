@@ -1,55 +1,84 @@
-<!DOCTYPE html> <html lang=en> <head> <meta charset=UTF-8> <meta name=viewport content="width=device-width,initial-scale=1"> <meta http-equiv=X-UA-Compatible content="ie=edge"> <link rel=icon type=image/png href=data:image/png;base64,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> <title>xuejs</title> <link href="css/xue.css" rel="stylesheet"></head> <body> <div id=xue> <h2>{{b}}</h2> <input type=text x-model=a> <input type=text name="" value="" x-model=b> <p>{{ a }} nihao</p> <p>{{ msg }}</p> <p>{{ msg1 }}</p> <button type=button name=button x-on:click=testToggle>change b</button> </div> <script type="text/javascript" src="js/xue.js"></script></body> <script> var vm = new Xue({
-  el: '#xue',
-  data: {
-    a: 'test model',
-    b: 'hello MVVM',
-    c: [1, 2],
-    flag: true
-  },
-  methods: {
-    testToggle: function () {
-      this.flag = !this.flag;
-      this.b = this.flag ? 'hello MVVM' : 'test success'
-    }
-  },
-  computed: {
-    msg: function () {
-      return `计算出来的属性为：${this.a}, ${this.b}。`;
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+  <meta charset=UTF-8>
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <meta http-equiv=X-UA-Compatible content="ie=edge">
+  <link rel=icon type=image/png href=data:image/png;base64,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>
+  <title>xuejs</title>
+  <link href="css/xue.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id=xue>
+    <h2>{{b}}{{" " +a}}</h2>
+    <input type=text x-model=a>
+    <input type=text name="" value="" x-model=b>
+    <p>{{ a }}</p>
+    <p>{{ msg }}</p>
+    <p>{{ msg1 }}</p>
+    <button type=button name=button x-on:click=testToggle>change b</button>
+  </div>
+  <script type="text/javascript" src="js/xue.js"></script>
+</body>
+<script>
+  var vm = new Xue({
+    el: '#xue',
+    data: {
+      a: 'test model',
+      b: 'hello MVVM',
+      c: [1, 2],
+      flag: true
     },
-    msg1: function () {
-      return `计算出来的属性为：${this.b}, ${this.a}。`;
+    methods: {
+      testToggle: function () {
+        this.flag = !this.flag;
+        this.b = this.flag ? 'hello MVVM' : 'test success'
+      }
+    },
+    computed: {
+      msg: function () {
+        return `计算出来的属性为：${this.a}, ${this.b}。`;
+      },
+      msg1: function () {
+        return `计算出来的属性为：${this.b}, ${this.a}。`;
+      }
+    },
+    mounted: function () {
+      console.log('this is mounted');
     }
-  },
-  mounted: function () {
-    console.log('this is mounted');
-  }
-  // watch: {
-  //   a: function (newVal, oldVal) {
-  //     console.log(newVal, oldVal);
-  //   }
-  // }
-});
-vm.$watch('a', function (newVal, oldVal) {
-  console.log(newVal, oldVal);
-}, {
-  immediate: true
-})
-vm.$watch('b', function (newVal, oldVal) {
-  console.log(newVal, oldVal);
-})
-vm.$on('test', function test () {
-  console.log('测试发布订阅实例方法$on')
-})
-vm.$on('test', function test1 () {
-  console.log('测试发布订阅实例方法$on 1')
-})
-vm.$once('test', function test2 () {
-  console.log('测试发布订阅实例方法$once')
-})
-vm.$emit('test')
-console.log(vm._events)
-vm.$off('test')
-console.log(vm._events)
-vm.c.push(4);
-// notify
-// vm.c => (3)[1, 2, 4, __ob__: Observer] </script> </html> 
+    // watch: {
+    //   a: function (newVal, oldVal) {
+    //     console.log(newVal, oldVal);
+    //   }
+    // }
+  });
+  vm.$watch('a', function (newVal, oldVal) {
+    console.log(newVal, oldVal);
+  }, {
+    immediate: true
+  })
+  vm.$watch('b', function (newVal, oldVal) {
+    console.log(newVal, oldVal);
+  })
+  vm.$on('test', function test() {
+    console.log('测试发布订阅实例方法$on')
+  })
+  vm.$on('test', function test1() {
+    console.log('测试发布订阅实例方法$on 1')
+  })
+  vm.$once('test', function test2() {
+    console.log('测试发布订阅实例方法$once')
+  })
+  vm.$emit('test')
+  console.log(vm._events)
+  vm.$off('test')
+  console.log(vm._events)
+  vm.c.push(4);
+  // notify
+  // vm.c => (3)[1, 2, 4, __ob__: Observer]
+
+</script>
+
+</html>
