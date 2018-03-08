@@ -73,10 +73,10 @@ class Xue {
   }
 
   /**
- * [$on 发布消息]
- * @param  {[type]}   event [事件别名]
- * @param  {Function} fn    [事件回调]
- */
+   * [$on 监听消息发布事件]
+   * @param  {[type]}   event [事件别名]
+   * @param  {Function} fn    [事件回调]
+   */
   $on(event, fn) {
     let this$1 = this;
 
@@ -92,7 +92,7 @@ class Xue {
     return self;
   }
   /**
-   * [$once 仅发布一次消息]
+   * [$once 监听消息发布事件，发布完立即注销监听]
    * @param  {[type]}   event [事件别名]
    * @param  {Function} fn    [事件回调]
    */
@@ -107,7 +107,7 @@ class Xue {
     return self;
   }
   /**
-   * [$off 取消发布]
+   * [$off 取消监听]
    * @param  {[type]}   event [事件别名]
    * @param  {Function} fn    [事件回调]
    */
@@ -150,7 +150,7 @@ class Xue {
   }
 
   /**
-   * [$emit 订阅触发]
+   * [$emit 发布消息]
    * @param  {[type]} event [事件别名]
    */
   $emit(event) {
