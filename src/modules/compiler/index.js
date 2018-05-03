@@ -45,6 +45,18 @@ class Compiler {
         text.replace(reg, (all, item) => {
           self.compileText(node, item)
         })
+//         function replaceTxt() {
+//           node.textContent = txt.replace(reg, (matched, placeholder) => {   
+//             console.log(placeholder);   // 匹配到的分组 如：song, album.name, singer...
+//             new Watcher(vm, placeholder, replaceTxt);   // 监听变化，进行匹配替换内容
+
+//             return placeholder.split('.').reduce((val, key) => {
+//               return val[key]; 
+//             }, vm);
+//           });
+//         };
+//         // 替换
+//         replaceTxt();
         // console.log(text.match(reg));
         // console.log(RegExp.$1);
         // self.compileText(node, RegExp.$1)
