@@ -1,6 +1,6 @@
 let uid = 0;
 class Dep {
-  constructor() {
+  constructor () {
     this.id = uid++;
     this.subs = []
   }
